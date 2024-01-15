@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.4.1](https://github.com/dabrowskif/typed-routes/compare/v0.4.0...v0.4.1) (2024-01-15)
+
+
+### Miscellaneous Chores
+
+* release 0.4.1 ([ffc66c0](https://github.com/dabrowskif/typed-routes/commit/ffc66c0770d2be0c3bd3482aba8f2050023821bf))
+
 ## [0.4.0](https://github.com/dabrowskif/typed-routes/compare/v0.3.0...v0.4.0) (2024-01-15)
 
 
