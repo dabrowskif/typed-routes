@@ -41,16 +41,19 @@ export class FileTreeGenerator {
     // this.logger.info(`Entering ${currentDirPath}`);
     const fileNames = this.getDirectoryFilesNames(currentDirPath);
 
-    return fileNames.reduce((fileTree, fileName) => {
-      const filePath = this.getFilePath(currentDirPath, fileName);
-      // this.logger.info(`Generating ${fileName}`);
+    return fileNames.reduce(
+      (fileTree, fileName) => {
+        const filePath = this.getFilePath(currentDirPath, fileName);
+        // this.logger.info(`Generating ${fileName}`);
 
-      fileTree[fileName] = this.isDirectory(filePath)
-        ? this.getDirectoryFileTree(filePath)
-        : null;
+        fileTree[fileName] = this.isDirectory(filePath)
+          ? this.getDirectoryFileTree(filePath)
+          : null;
 
-      return fileTree;
-    }, {});
+        return fileTree;
+      },
+      {} as Record<string, FileTree>,
+    );
   }
 
   private getDirectoryFilesNames(path: string): string[] {

@@ -4,8 +4,14 @@
     "module": "commonjs",
     "target": "es2019",
     "declaration": true,
+    "sourceMap": false,
+    "strict": true,
     "outDir": "./dist",
-    "strictNullChecks": true
+    "rootDir": "lib",
+    "strictNullChecks": true,
+    "useUnknownInCatchVariables": false,
+    "types": ["node"]
   },
-  "include": ["lib/**/*"]
+  "include": ["lib/**/*"],
+  "exclude": ["node_modules", "test"]
 }
