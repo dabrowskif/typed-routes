@@ -1,4 +1,5 @@
 {
+  "name": "typed-routes",
   "scripts": {
     "dev": "tsc && node dist/index.js"
   },
