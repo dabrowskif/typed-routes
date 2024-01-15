@@ -151,8 +151,6 @@ This type-only implementation will be particularly beneficial for projects where
 
 Contributions are welcome! If you have a suggestion or enhancement, feel free to fork the repo and create a pull request, or open an issue with the tag "enhancement".
 
-#### Small TODO List:
-
 ## License
 
 This project is licensed under the MIT License.
