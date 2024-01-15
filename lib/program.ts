@@ -17,15 +17,19 @@ export class Program {
   run() {
     this.logger.info("Running with options");
     this.logger.info(this.options);
-    const fileTree = new FileTreeGenerator(this.logger).generate(
-      this.options.directory,
-    );
-    const routes = new RoutesGenerator(this.options, this.logger).generate(
-      fileTree,
-      this.options.functionName,
-    );
+    try {
+      const fileTree = new FileTreeGenerator(this.logger).generate(
+        this.options.directory,
+      );
+      const routes = new RoutesGenerator(this.options, this.logger).generate(
+        fileTree,
+        this.options.functionName,
+      );
 
-    this.writeRoutesToFile(routes, this.options);
+      this.writeRoutesToFile(routes, this.options);
+    } catch (error) {
+      this.handleError(error);
+    }
   }
 
   private writeRoutesToFile(routes: string, options: CLIOptions) {
@@ -36,5 +40,21 @@ export class Program {
     this.logger.info(`Saving generated routes to ${finalFilePath}`);
     fs.writeFileSync(finalFilePath, routes, "utf-8");
     this.logger.success(`Routes saved.`);
+  }
+
+  private handleError(error: any) {
+    const errorMessage = error?.message;
+
+    if (errorMessage) {
+      this.logger.error(errorMessage);
+      if (this.options.verbose) {
+        console.error(error);
+      }
+    } else {
+      this.logger.error("An unexpected error has occured.");
+      throw error;
+    }
+
+    process.exit(1);
   }
 }
