@@ -26,7 +26,7 @@ export class RoutesGenerator {
    * Generates a stringified representation of the routes based on the file tree.
    */
   generate(rootFileTree: FileTree, functionName: string): string {
-    this.logger.info("Generating routes...");
+    this.logger.info("Generating routes...\n");
 
     const stringifiedFileTree = this.getStringifiedFileTree(
       rootFileTree,
@@ -37,7 +37,7 @@ export class RoutesGenerator {
       this.cliOptions.moduleSystem,
     );
 
-    this.logger.success(`Routes have been generated`);
+    this.logger.success(`\nRoutes have been generated`);
 
     return rootString;
   }
@@ -92,7 +92,8 @@ export class RoutesGenerator {
       case "commonjs":
         return rootString + `module.exports.routes = {${content}}`;
       default:
-        throw new Error(`Unsupported module system: ${moduleSystem}`);
+        this.logger.error(`Unsupported module system: ${moduleSystem}`);
+        process.exit(1);
     }
   }
 
