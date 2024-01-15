@@ -1,5 +1,6 @@
 {
   "name": "typed-routes",
+  "version": "0.0.1",
   "license": "MIT",
   "author": "dabrowskif",
   "main": "./dist/index.js",
@@ -9,7 +10,7 @@
     "dev": "npm run build && npm run start"
   },
   "bin": {
-    "typed-routes": "./dist/index.js"
+    "typed-routes": "dist/index.js"
   },
   "dependencies": {
     "chalk": "^4.1.2",
