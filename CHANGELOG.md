@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.0](https://github.com/dabrowskif/typed-routes/compare/v0.1.0...v0.2.0) (2024-01-15)
+
+
+### Features
+
+* update cli ([65c78d1](https://github.com/dabrowskif/typed-routes/commit/65c78d14b21623c89b3b36113e2472a917c6b23f))
+
 ## [0.1.0](https://github.com/dabrowskif/typed-routes/compare/v0.0.1...v0.1.0) (2024-01-15)
 
 
