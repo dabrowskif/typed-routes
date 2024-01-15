@@ -28,7 +28,7 @@ export const setupCLIOptions = (args: string[]) =>
     .option(
       "-m, --module-system <type>",
       "Module system to use (commonjs or es6)",
-      "commonjs",
+      "es6",
     )
     .parse(args)
     .opts<CLIOptions>();
