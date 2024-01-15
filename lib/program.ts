@@ -29,7 +29,10 @@ export class Program {
   }
 
   private writeRoutesToFile(routes: string, options: CLIOptions) {
-    const finalFilePath = path.join(options.outputDir, options.fileName);
+    const finalFilePath = path.join(
+      options.outputDirectory,
+      options.outputFileName,
+    );
     this.logger.info(`Saving generated routes to ${finalFilePath}`);
     fs.writeFileSync(finalFilePath, routes, "utf-8");
     this.logger.success(`Routes saved.`);

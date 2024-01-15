@@ -10,12 +10,12 @@ export const setupCLIOptions = (args: string[]) =>
       "Framework for which to generate routes",
     )
     .option(
-      "-o, --output-dir <path>",
+      "-od, --output-directory <path>",
       "Output directory where the file is saved",
       path.join(process.cwd()),
     )
     .option(
-      "-f, --file-name <name>",
+      "-of, --output-file-name <name>",
       "Generated file name",
       path.join("routes.ts"),
     )
@@ -32,17 +32,12 @@ export const setupCLIOptions = (args: string[]) =>
     )
     .parse(args)
     .opts<CLIOptions>();
-const op1 = [
-  "-m, --module-system <type>",
-  "Module system to use (commonjs or es6)",
-  "commonjs",
-];
 
 export type CLIOptions = {
   directory: string;
   verbose: boolean;
-  outputDir: string;
-  fileName: string;
+  outputDirectory: string;
+  outputFileName: string;
   functionName: string;
   moduleSystem: string;
   framework: Framework;
