@@ -16,4 +16,4 @@ jobs:
       - uses: google-github-actions/release-please-action@v4
         with:
           token: ${{ secrets.GHA_PAT }}
-          release-type: simple
+          release-type: node
