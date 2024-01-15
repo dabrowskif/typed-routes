@@ -15,26 +15,28 @@ export class RoutesGenerator {
   private readonly frameworkStrategy: FrameworkStrategy;
 
   constructor(
-    private readonly cliOptions: CLIOptions,
     private readonly logger: Logger,
+    private readonly framework: Framework,
   ) {
-    this.frameworkStrategy =
-      this.frameworkStrategies[this.cliOptions.framework];
+    this.frameworkStrategy = this.frameworkStrategies[this.framework];
   }
 
   /**
    * Generates a stringified representation of the routes based on the file tree.
    */
-  generate(rootFileTree: FileTree, functionName: string): string {
+  generate(
+    rootFileTree: FileTree,
+    options: { functionName: string; moduleSystem: string },
+  ): string {
     this.logger.info("Generating routes...\n");
 
     const stringifiedFileTree = this.getStringifiedFileTree(
       rootFileTree,
-      functionName,
+      options.functionName,
     );
     const rootString = this.stringifyRoot(
       stringifiedFileTree,
-      this.cliOptions.moduleSystem,
+      options.moduleSystem,
     );
 
     this.logger.success(`\nRoutes have been generated`);

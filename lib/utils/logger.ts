@@ -1,12 +1,10 @@
 import chalk from "chalk";
-import { CLIOptions } from "./cli";
 
 export class Logger {
-  constructor(private readonly cliOptions: CLIOptions) {}
+  constructor(private readonly verbose: boolean) {}
 
   info(message: any) {
-    this.cliOptions.verbose &&
-      console.info(chalk.white(this.messageToString(message)));
+    this.verbose && console.info(chalk.white(this.messageToString(message)));
   }
 
   success(message: any) {

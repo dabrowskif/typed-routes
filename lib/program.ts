@@ -6,33 +6,53 @@ import { RoutesGenerator } from "./modules/routes-generator";
 import { CLIOptions, setupCLIOptions } from "./utils/cli";
 
 export class Program {
-  private logger: Logger;
-  private options: CLIOptions;
+  private readonly logger: Logger;
+  private readonly options: CLIOptions;
+  private readonly fileTreeGenerator: FileTreeGenerator;
+  private readonly routesGenerator: RoutesGenerator;
 
   constructor(args: string[]) {
     this.options = setupCLIOptions(args);
-    this.logger = new Logger(this.options);
+    this.logger = new Logger(this.options.verbose);
+    this.fileTreeGenerator = new FileTreeGenerator(this.logger);
+    this.routesGenerator = new RoutesGenerator(
+      this.logger,
+      this.options.framework,
+    );
   }
 
   run() {
     this.logger.info("Running with options");
     this.logger.info(this.options);
-    try {
-      const fileTree = new FileTreeGenerator(this.logger).generate(
-        this.options.directory,
-      );
-      const routes = new RoutesGenerator(this.options, this.logger).generate(
-        fileTree,
-        this.options.functionName,
-      );
 
-      this.writeRoutesToFile(routes, this.options);
+    const {
+      directory,
+      moduleSystem,
+      functionName,
+      outputDirectory,
+      outputFileName,
+    } = this.options;
+
+    try {
+      const fileTree = this.fileTreeGenerator.generate(directory);
+      const routes = this.routesGenerator.generate(fileTree, {
+        moduleSystem,
+        functionName,
+      });
+
+      this.writeRoutesToFile(routes, {
+        outputFileName,
+        outputDirectory,
+      });
     } catch (error) {
       this.handleError(error);
     }
   }
 
-  private writeRoutesToFile(routes: string, options: CLIOptions) {
+  private writeRoutesToFile(
+    routes: string,
+    options: { outputDirectory: string; outputFileName: string },
+  ) {
     const finalFilePath = path.join(
       options.outputDirectory,
       options.outputFileName,
