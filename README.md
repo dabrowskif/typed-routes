@@ -1,6 +1,6 @@
 # Typed Route Generator for Frontend Frameworks
 
-This Node.js package provides a route generation tool designed for Front-end meta frameworks that use on file-based routing projects. It simplifies the process of creating typed route structures by automatically converting file system-based routing into a JavaScript object, enhancing type safety and improving developer experience.
+This Node.js package provides a route generation tool designed for Front-end meta frameworks that use file-based routing projects. It simplifies the process of creating typed route structures by automatically converting file system-based routing into a JavaScript object, enhancing type safety and improving developer experience.
 
 ## Features
 
@@ -16,6 +16,28 @@ This Node.js package provides a route generation tool designed for Front-end met
 - [ ] Nuxt.js
 - [ ] Astro
 - [ ] Other frameworks (coming soon)
+
+## TODO
+
+In the development roadmap for the Typed Route Generator, the following features are planned (and many, many more :) ):
+
+1. **More Frameworks Support**
+
+   - Extend support to additional front-end frameworks, enhancing the tool's versatility across different development environments.
+
+2. **Custom Strategy Provider**
+
+   - Implement functionality to allow users to define custom strategies for route generation. This feature aims to provide greater flexibility and adaptability to specific project requirements.
+
+3. **Type-Only Route Definitions**
+
+   - Evolve the current route functions to support type-only definitions that significantly reduce or eliminate runtime overhead. The focus will be on enhancing the developer experience by leveraging TypeScript's advanced type system to provide:
+     - Simple functions with typed parameters for general use.
+     - Framework-specific enhancements, such as type-safe wrappers for SvelteKit's goto function or Next.js's config hook, ensuring a seamless integration with the respective frameworks' native routing capabilities.
+
+4. **SvelteKit Segments Enhancement**
+
+   - Incorporate support for SvelteKit's advanced routing features, including segment sorting and parameter encoding. This will align the Typed Route Generator with SvelteKit's latest routing capabilities, allowing for more sophisticated route structures.
 
 ## Current Implementation vs. Future Plans
 
@@ -47,13 +69,13 @@ This type-only implementation will be particularly beneficial for projects where
 Install the package using npm:
 
 ```bash
-npm install dabrowskif/typed-routes
+npm install @dabrowskif/typed-routes
 ```
 
 Or using yarn:
 
 ```bash
-yarn add dabrowskif/typed-routes
+yarn add @dabrowskif/typed-routes
 ```
 
 ## Usage
@@ -75,19 +97,21 @@ Here are the available options you can use with the Typed Route Generator:
 
   - `commonjs`
 
-`npx dabrowskif/typed-routes -fr SvelteKit -d src/routes -od src -of routes.ts`
+#### Example
+
+`npx @dabrowskif/typed-routes -fr SvelteKit -d src/routes -od src -of generated-typed-routes.ts -fn _getRoute`
 
 ### CLI Usage
 
 To use this tool via the command line, you can run it directly with npx:
 
-`npx dabrowskif/typed-routes -fr SvelteKit`
+`npx @dabrowskif/typed-routes -fr SvelteKit -d src/routes`
 
-Alternatively, if you have installed it as a devDependency in your project, you can add a script to your `package.json`:
+Alternatively, if you have installed it as a dependency in your project, you can add a script to your `package.json`:
 
-```json
+```
 scripts": {
-"generate-routes": "typed-routes -fr SvelteKit"
+  "generate-routes": "typed-routes -fr SvelteKit -d src/routes"
 }
 ```
 
@@ -98,30 +122,11 @@ For a more integrated development experience, consider running this script concu
 
 ```
 "scripts": {
-"dev": "concurrently "npm run generate-routes -- --watch" "npm run start-framework-dev""
+  "dev": "concurrently "npm run generate-routes -- --watch" "npm run start-framework-dev""
 }
 ```
 
 This setup will regenerate routes on-the-fly as your file structure changes, alongside your normal development server.
-
-## TODO
-
-In the development roadmap for the Typed Route Generator, the following features are planned:
-
-1. **More Frameworks Support**
-
-   - Extend support to additional front-end frameworks, enhancing the tool's versatility across different development environments.
-
-2. **Custom Strategy Provider**
-
-   - Implement functionality to allow users to define custom strategies for route generation. This feature aims to provide greater flexibility and adaptability to specific project requirements.
-
-3. **Typed Query Parameters**
-   - Enhance route functions to include typed query parameters. This improvement would offer two approaches:
-     - A simple function with typed parameters for general use.
-     - Enhanced framework-specific functions, such as SvelteKit's `goto` or a Next.js config wrapper (withTypedRoutes), for a more integrated experience with the respective frameworks.
-
-These updates are aimed at broadening the utility and applicability of the Typed Route Generator, making it a more powerful tool in the developer's toolkit.
 
 ## Contributing
 
