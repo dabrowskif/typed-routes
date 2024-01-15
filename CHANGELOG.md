@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.3.0](https://github.com/dabrowskif/typed-routes/compare/v0.2.0...v0.3.0) (2024-01-15)
+
+
+### Features
+
+* update package json ([0298429](https://github.com/dabrowskif/typed-routes/commit/0298429e07e147eae3074c05cb4013964fa10def))
+
 ## [0.2.0](https://github.com/dabrowskif/typed-routes/compare/v0.1.0...v0.2.0) (2024-01-15)
 
 
