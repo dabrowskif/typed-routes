@@ -19,15 +19,15 @@ This Node.js package provides a route generation tool designed for Front-end met
 
 ## TODO
 
-In the development roadmap for the Typed Route Generator, the following features are planned (and many, many more :) ):
+### A LOT :)
+
+The following features are planned (and many, many more ):
 
 1. **More Frameworks Support**
 
-   - Extend support to additional front-end frameworks, enhancing the tool's versatility across different development environments.
+2. **CLI Enhancements**
 
-2. **Custom Strategy Provider**
-
-   - Implement functionality to allow users to define custom strategies for route generation. This feature aims to provide greater flexibility and adaptability to specific project requirements.
+   - Current CLI usage experience is not be the most satisfying thing I can dream of. Improving it will ensure easiness and well documented integrations for upcoming features.
 
 3. **Type-Only Route Definitions**
 
@@ -38,6 +38,18 @@ In the development roadmap for the Typed Route Generator, the following features
 4. **SvelteKit Segments Enhancement**
 
    - Incorporate support for SvelteKit's advanced routing features, including segment sorting and parameter encoding. This will align the Typed Route Generator with SvelteKit's latest routing capabilities, allowing for more sophisticated route structures.
+
+5. **Custom Strategy Provider**
+
+   - Implement functionality to allow defining custom strategies for route generation. This feature aims to provide greater flexibility and adaptability to specific project requirements.
+
+6. **Support for object-based arguments, instead of multiple arguments inside one function**
+
+   - Passing many arguments into heavily nested dynamic routes one by one is some kind of anti-pattern, so creating an option to make getter function a one-argument based with multiple properties is a good alternative.
+
+7. **Support for passing a query string**
+   - Add a simple option to pass a query string into the function invocation in order to produce full and final route for usage.
+   - This actually can be even typed, after creating specific file to look for, or scanning a main route file.
 
 ## Current Implementation vs. Future Plans
 
@@ -138,6 +150,8 @@ This setup will regenerate routes on-the-fly as your file structure changes, alo
 ## Contributing
 
 Contributions are welcome! If you have a suggestion or enhancement, feel free to fork the repo and create a pull request, or open an issue with the tag "enhancement".
+
+#### Small TODO List:
 
 ## License
 
