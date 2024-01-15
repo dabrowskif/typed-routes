@@ -99,13 +99,17 @@ Here are the available options you can use with the Typed Route Generator:
 
 #### Example
 
-`npx @dabrowskif/typed-routes -fr SvelteKit -d src/routes -od src -of generated-typed-routes.ts -fn _getRoute`
+```bash
+npx @dabrowskif/typed-routes -fr SvelteKit -d src/routes -od src -of generated-typed-routes.ts -fn _getRoute
+```
 
 ### CLI Usage
 
 To use this tool via the command line, you can run it directly with npx:
 
-`npx @dabrowskif/typed-routes -fr SvelteKit -d src/routes`
+```bash
+npx @dabrowskif/typed-routes -fr SvelteKit -d src/routes
+```
 
 Alternatively, if you have installed it as a dependency in your project, you can add a script to your `package.json`:
 
@@ -116,7 +120,10 @@ scripts": {
 ```
 
 Then, you can generate routes with:
-`npm run generate-routes`
+
+```bash
+npm run generate-routes
+```
 
 For a more integrated development experience, consider running this script concurrently with your framework's development server. Tools like `concurrently` or `npm-run-all` can be used to run multiple npm scripts simultaneously. For instance:
 
