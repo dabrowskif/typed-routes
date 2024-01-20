@@ -1,20 +1,24 @@
 /**
- * Abstract class representing a strategy for handling arguments in route generation.
- * This class defines a contract for methods to be implemented for different types of arguments.
+ * Represents a strategy for handling arguments in route generation.
  */
 export abstract class ArgStrategy {
   /**
-   * Abstract method to determine if the given file name matches the argument pattern.
+   * For logging purfoses
+   */
+  abstract readonly name: string;
+
+  /**
+   * Determines if the given file name matches the argument pattern.
    */
   abstract isMatching(fileName: string): boolean;
 
   /**
-   * Abstract method to extract the argument from the file name.
+   * Extracts the argument from the file name.
    */
   abstract extractArg(fileName: string): Arg;
 
   /**
-   * Abstract method to get the path segment representation of the argument.
+   * Gets the path segment representation of the argument.
    */
   abstract getPathSegment(arg: Arg): string;
 }
@@ -38,3 +42,8 @@ export type Arg = {
       required: boolean;
     }
 );
+
+export abstract class FrameworkStrategy {
+  abstract readonly defaultArgStrategy: ArgStrategy;
+  abstract readonly argStrategies: ArgStrategy[];
+}

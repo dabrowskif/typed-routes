@@ -37,23 +37,22 @@ yarn add @dabrowskif/typed-routes
 
 Here are the available options you can use with the Typed Route Generator:
 
-- `--directory <path>`: Specify the path of your routes directory.
-- `--framework <type>`: Choose the framework. Available options:
+- `-r, --root-directory <string>`: Path of your routes directory.
+- `-f, --framework <Framework>`: Choose the framework. Available options:
   - `SvelteKit`
   - `Nextjs`
-- `--output-dir <path>`: Define the output directory for the generated file.
-- `--file-name <name>`: Set the name for the generated file.
-- `--function-name <name>`: Customize the function name used in the route object.
-- `--module-system <type>`: Select the module system. Available options:
-
+- `-od, --output-directory <string>`: Output directory for the generated file.
+- `-of, --output-file-name <string>`: Name for the generated routes file.
+- `-fn, --function-name <name>`: Customize the function name used in the route object.
+- `--module-system <ModuleSystem>`: Select the module system. Available options:
   - `es6`
-
   - `commonjs`
+- `-v, --verbose <boolean>`: Enable verbose logging
 
-#### Example
+#### Minimal example
 
 ```bash
-npx @dabrowskif/typed-routes -fr SvelteKit -d src/routes -od src -of generated-typed-routes.ts -fn _getRoute
+npx @dabrowskif/typed-routes -f SvelteKit -r src/routes
 ```
 
 ### CLI Usage
@@ -61,14 +60,14 @@ npx @dabrowskif/typed-routes -fr SvelteKit -d src/routes -od src -of generated-t
 To use this tool via the command line, you can run it directly with npx:
 
 ```bash
-npx @dabrowskif/typed-routes -fr SvelteKit -d src/routes
+npx @dabrowskif/typed-routes -fr SvelteKit -r src/routes
 ```
 
 Alternatively, if you have installed it as a dependency in your project, you can add a script to your `package.json`:
 
 ```
 scripts": {
-  "generate-routes": "typed-routes -fr SvelteKit -d src/routes"
+  "generate-routes": "typed-routes -fr SvelteKit -r src/routes"
 }
 ```
 
@@ -82,7 +81,7 @@ For a more integrated development experience, consider running this script concu
 
 ```
 "scripts": {
-  "dev": "concurrently "npm run generate-routes -- --watch" "npm run start-framework-dev""
+  "dev": "concurrently "npm run generate-routes -- --watch" "npm run dev""
 }
 ```
 
@@ -90,9 +89,7 @@ This setup will regenerate routes on-the-fly as your file structure changes, alo
 
 ## TODO
 
-### A LOT :)
-
-The following features are planned (and many, many more ):
+The following features are planned:
 
 1. **More Frameworks Support**
 
@@ -102,9 +99,9 @@ The following features are planned (and many, many more ):
 
 3. **Type-Only Route Definitions**
 
-   - Evolve the current route functions to support type-only definitions that significantly reduce or eliminate runtime overhead. The focus will be on enhancing the developer experience by leveraging TypeScript's advanced type system to provide:
+   - Evolve the current route functions to support type-only definitions that adds minimal runtime overhead.
      - Simple functions with typed parameters for general use.
-     - Framework-specific enhancements, such as type-safe wrappers for SvelteKit's goto function or Next.js's config hook, ensuring a seamless integration with the respective frameworks' native routing capabilities.
+     - Framework-specific enhancements, such as type-safe wrappers for SvelteKit's goto function or Next.js's config hook
 
 4. **SvelteKit Segments Enhancement**
 
@@ -116,7 +113,7 @@ The following features are planned (and many, many more ):
 
 6. **Support for object-based arguments, instead of multiple arguments inside one function**
 
-   - Passing many arguments into heavily nested dynamic routes one by one is some kind of anti-pattern, so creating an option to make getter function a one-argument based with multiple properties is a good alternative.
+   - Passing many arguments into heavily nested dynamic routes one by one is more or less an anti-pattern, so creating an option to make getter function a one-argument based with multiple properties is a good alternative.
 
 7. **Support for passing a query string**
    - Add a simple option to pass a query string into the function invocation in order to produce full and final route for usage.
@@ -143,7 +140,7 @@ routes.home["[profileId]"]._get("id-123");
 
 ### Future Plans - Type-Only Implementation
 
-Looking ahead, there are plans to also develop a type-only version of the Typed Route Generator. This implementation will focus on creating TypeScript types instead of runtime objects. The key advantage of this approach is the elimination of runtime overhead, as the route definitions will purely be type annotations without any impact on the runtime bundle size.
+Looking ahead, I have plans to also develop a type-only version of. This implementation will focus on creating TypeScript types instead of runtime objects. The key advantage of this approach is the elimination of runtime overhead, as the route definitions will purely be type annotations without any impact on the runtime bundle size.
 
 This type-only implementation will be particularly beneficial for projects where bundle size is a critical concern and where the primary goal is to leverage TypeScript's type-checking capabilities without adding extra runtime code.
 

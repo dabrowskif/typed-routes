@@ -1,32 +1,29 @@
 import * as path from "path";
 import * as fs from "fs";
-import { FileTreeGenerator } from "./modules/file-tree-generator";
-import { Logger } from "./utils/logger";
-import { RoutesGenerator } from "./modules/routes-generator";
-import { CLIOptions, setupCLIOptions } from "./utils/cli";
+import { FileTreeGenerator } from "../file-tree-generator/file-tree-generator";
+import { RoutesGenerator } from "../routes-generator/routes-generator";
+import { CLI } from "./cli/cli";
+import type { ProgramOptions } from "./cli/types";
+import { Logger } from "../../utils/logger/logger";
 
 export class Program {
   private readonly logger: Logger;
-  private readonly options: CLIOptions;
+  private readonly options: ProgramOptions;
   private readonly fileTreeGenerator: FileTreeGenerator;
   private readonly routesGenerator: RoutesGenerator;
 
   constructor(args: string[]) {
-    this.options = setupCLIOptions(args);
-    this.logger = new Logger(this.options.verbose);
-    this.fileTreeGenerator = new FileTreeGenerator(this.logger);
-    this.routesGenerator = new RoutesGenerator(
-      this.logger,
-      this.options.framework,
-    );
+    this.logger = new Logger(Program.name);
+    this.options = new CLI().getProgramOptions(args);
+    this.fileTreeGenerator = new FileTreeGenerator();
+    this.routesGenerator = new RoutesGenerator(this.options.framework);
   }
 
   run() {
-    this.logger.info("Running with options");
-    this.logger.info(this.options);
+    this.logger.info("Running with options", this.options);
 
     const {
-      directory,
+      rootDirectory,
       moduleSystem,
       functionName,
       outputDirectory,
@@ -34,7 +31,7 @@ export class Program {
     } = this.options;
 
     try {
-      const fileTree = this.fileTreeGenerator.generate(directory);
+      const fileTree = this.fileTreeGenerator.generate(rootDirectory);
       const routes = this.routesGenerator.generate(fileTree, {
         moduleSystem,
         functionName,
@@ -59,17 +56,14 @@ export class Program {
     );
     this.logger.info(`Saving generated routes to ${finalFilePath}`);
     fs.writeFileSync(finalFilePath, routes, "utf-8");
-    this.logger.success(`Routes saved.`);
+    this.logger.info(`Routes saved.`);
   }
 
   private handleError(error: any) {
     const errorMessage = error?.message;
 
     if (errorMessage) {
-      this.logger.error(errorMessage);
-      if (this.options.verbose) {
-        console.error(error);
-      }
+      this.logger.error(errorMessage, error);
     } else {
       this.logger.error("An unexpected error has occured.");
       throw error;

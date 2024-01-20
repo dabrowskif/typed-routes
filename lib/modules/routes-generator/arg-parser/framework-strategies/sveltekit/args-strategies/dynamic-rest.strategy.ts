@@ -1,6 +1,8 @@
-import { Arg, ArgStrategy } from "../../arg.strategy";
+import { ArgExtractingError } from "../../errors";
+import { type Arg, ArgStrategy } from "../../types";
 
 export class DynamicRestArgStrategy implements ArgStrategy {
+  readonly name = DynamicRestArgStrategy.name;
   private readonly matchRegexp = /^\[\.\.\.\w+\]$/;
   private readonly extractRegexp = /^\[\.\.\.(\w+)\]$/;
 
@@ -13,7 +15,7 @@ export class DynamicRestArgStrategy implements ArgStrategy {
     const arg = match?.[1];
 
     if (!arg) {
-      throw new Error(
+      throw new ArgExtractingError(
         "Argument was matched properly, but did not extract properly.",
       );
     }

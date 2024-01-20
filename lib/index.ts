@@ -1,6 +1,5 @@
 #!/usr/bin/env node
 
-import { Program } from "./program";
+import { Program } from "./modules/program/program";
 
-const program = new Program(process.argv);
-program.run();
+new Program(process.argv).run();

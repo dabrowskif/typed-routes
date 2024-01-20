@@ -7,7 +7,8 @@
   "scripts": {
     "build": "tsc",
     "start": "node dist/index.js",
-    "dev": "tsc && node dist/index.js"
+    "dev": "tsc && node dist/index.js",
+    "test:e2e": "tsc && node dist/index.js -r test/sveltekit-tests/test1/routes -f sveltekit -v true"
   },
   "repository": {
     "type": "git",
@@ -19,9 +20,10 @@
   "dependencies": {
     "chalk": "^4.1.2",
     "commander": "^11.1.0",
-    "typescript": "^5.3.3"
+    "date-fns": "^3.6.0"
   },
   "devDependencies": {
-    "@types/node": "^20.10.7"
+    "@types/node": "^20.10.7",
+    "typescript": "^5.3.3"
   }
 }
