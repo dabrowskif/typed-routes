@@ -7,7 +7,8 @@
   "scripts": {
     "build": "tsc",
     "start": "node dist/index.js",
-    "dev": "tsc && node dist/index.js"
+    "dev": "tsc && node dist/index.js",
+    "test:e2e": "tsc && node dist/index.js -- -d /routes"
   },
   "repository": {
     "type": "git",

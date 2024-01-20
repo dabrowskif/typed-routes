@@ -1,6 +1,5 @@
 /**
  * Abstract class representing a strategy for handling arguments in route generation.
- * This class defines a contract for methods to be implemented for different types of arguments.
  */
 export abstract class ArgStrategy {
   /**
@@ -38,3 +37,8 @@ export type Arg = {
       required: boolean;
     }
 );
+
+export type FrameworkStrategy = {
+  defaultArgStrategy: ArgStrategy;
+  argStrategies: ArgStrategy[];
+};

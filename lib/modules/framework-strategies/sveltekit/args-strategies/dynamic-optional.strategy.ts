@@ -1,8 +1,8 @@
-import { Arg, ArgStrategy } from "../../arg.strategy";
+import { Arg, ArgStrategy } from "../../types";
 
-export class DynamicRequiredArgStrategy implements ArgStrategy {
-  private readonly matchRegexp = /^\[\w+\]$/;
-  private readonly extractRegexp = /^\[(\w+)\]$/;
+export class DynamicOptionalArgStrategy implements ArgStrategy {
+  private readonly matchRegexp = /^\[\[\w+\]\]$/;
+  private readonly extractRegexp = /^\[\[(\w+)\]\]$/;
 
   isMatching(fileName: string) {
     return this.matchRegexp.test(fileName);
@@ -22,11 +22,11 @@ export class DynamicRequiredArgStrategy implements ArgStrategy {
       isDynamic: true,
       type: "string",
       name: arg,
-      required: true,
+      required: false,
     };
   }
 
   getPathSegment(arg: Arg) {
-    return `/\$\{${arg.name}\}`;
+    return `\$\{${arg.name} ? "/" + ${arg.name} : ""\}`;
   }
 }

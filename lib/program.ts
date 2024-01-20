@@ -3,22 +3,25 @@ import * as fs from "fs";
 import { FileTreeGenerator } from "./modules/file-tree-generator";
 import { Logger } from "./utils/logger";
 import { RoutesGenerator } from "./modules/routes-generator";
-import { CLIOptions, setupCLIOptions } from "./utils/cli";
+import { CLI } from "./utils/cli";
+import { ArgParser } from "./modules/arg-parser";
+import { ProgramOptions } from "./utils/cli/types";
 
 export class Program {
   private readonly logger: Logger;
-  private readonly options: CLIOptions;
+  private readonly options: ProgramOptions;
   private readonly fileTreeGenerator: FileTreeGenerator;
   private readonly routesGenerator: RoutesGenerator;
+  private readonly argParser: ArgParser;
+  private readonly cli: CLI;
 
   constructor(args: string[]) {
-    this.options = setupCLIOptions(args);
-    this.logger = new Logger(this.options.verbose);
+    this.cli = new CLI(args);
+    this.options = this.cli.getProgramOptions();
+    this.logger = new Logger(this.options.verboseLogging);
     this.fileTreeGenerator = new FileTreeGenerator(this.logger);
-    this.routesGenerator = new RoutesGenerator(
-      this.logger,
-      this.options.framework,
-    );
+    this.argParser = new ArgParser(this.logger, this.options.framework);
+    this.routesGenerator = new RoutesGenerator(this.logger, this.argParser);
   }
 
   run() {
@@ -26,7 +29,7 @@ export class Program {
     this.logger.info(this.options);
 
     const {
-      directory,
+      rootDirectory,
       moduleSystem,
       functionName,
       outputDirectory,
@@ -34,7 +37,7 @@ export class Program {
     } = this.options;
 
     try {
-      const fileTree = this.fileTreeGenerator.generate(directory);
+      const fileTree = this.fileTreeGenerator.generate(rootDirectory);
       const routes = this.routesGenerator.generate(fileTree, {
         moduleSystem,
         functionName,
@@ -66,10 +69,7 @@ export class Program {
     const errorMessage = error?.message;
 
     if (errorMessage) {
-      this.logger.error(errorMessage);
-      if (this.options.verbose) {
-        console.error(error);
-      }
+      this.logger.error(errorMessage, error);
     } else {
       this.logger.error("An unexpected error has occured.");
       throw error;

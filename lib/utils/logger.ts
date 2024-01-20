@@ -1,10 +1,16 @@
 import chalk from "chalk";
 
 export class Logger {
-  constructor(private readonly verbose: boolean) {}
+  constructor(private readonly verboseLogging: boolean) {}
+
+  log(message: any) {
+    this.verboseLogging &&
+      console.log(chalk.white(this.messageToString(message)));
+  }
 
   info(message: any) {
-    this.verbose && console.info(chalk.white(this.messageToString(message)));
+    this.verboseLogging &&
+      console.info(chalk.white(this.messageToString(message)));
   }
 
   success(message: any) {
@@ -15,8 +21,12 @@ export class Logger {
     console.warn(chalk.yellow(this.messageToString(message)));
   }
 
-  error(message: any) {
+  error(message: any, error?: any) {
     console.error(chalk.red(this.messageToString(message)));
+
+    if (this.verboseLogging) {
+      console.error(error);
+    }
   }
 
   private messageToString(message: any) {
