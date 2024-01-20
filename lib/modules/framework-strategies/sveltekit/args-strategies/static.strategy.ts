@@ -1,4 +1,4 @@
-import { Arg, ArgStrategy } from "../../arg.strategy";
+import { Arg, ArgStrategy } from "../../types";
 
 export class StaticArgStrategy implements ArgStrategy {
   isMatching(_fileName: string) {
