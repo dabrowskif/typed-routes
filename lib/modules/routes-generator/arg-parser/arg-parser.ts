@@ -1,23 +1,30 @@
-import { Arg, ArgStrategy } from "../arg.strategy";
-import { FrameworkStrategy } from "../framework.strategy";
-import { DynamicOptionalArgStrategy } from "./arg-strategies/dynamic-optional.strategy";
-import { DynamicRequiredArgStrategy } from "./arg-strategies/dynamic-required.strategy";
-import { DynamicRestArgStrategy } from "./arg-strategies/dynamic-rest.strategy";
-import { GroupArgStrategy } from "./arg-strategies/group.strategy";
-import { StaticArgStrategy } from "./arg-strategies/static.strategy";
+import {
+  type Arg,
+  type FrameworkStrategy,
+  ArgStrategy,
+} from "./framework-strategies/types";
+import { SveltekitStrategy } from "./framework-strategies/sveltekit/sveltekit.strategy";
+import { Framework } from "../../program/cli/types";
+import { Logger } from "../../../utils/logger/logger";
 
-export class SvelteKitStrategy implements FrameworkStrategy {
-  private readonly argStrategies: Record<ArgType, ArgStrategy> = {
-    [ArgType.GROUP]: new GroupArgStrategy(),
-    [ArgType.DYNAMIC_REST]: new DynamicRestArgStrategy(),
-    [ArgType.DYNAMIC_OPTIONAL]: new DynamicOptionalArgStrategy(),
-    [ArgType.DYNAMIC_REQUIRED]: new DynamicRequiredArgStrategy(),
-    // INFO: Static strategy should be the last as it is a fallback strategy.
-    [ArgType.STATIC]: new StaticArgStrategy(),
+/**
+ * Parses args from filenames depending on framework strategy
+ */
+export class ArgParser {
+  private readonly frameworkStrategies: Record<Framework, FrameworkStrategy> = {
+    [Framework.SVELTEKIT]: new SveltekitStrategy(),
+    // [Framework.NEXTJS]: NEXT_JS, // TODO implement nextjs
   };
+  private readonly frameworkStrategy: FrameworkStrategy;
+  private readonly logger: Logger;
+
+  constructor(private readonly framework: Framework) {
+    this.frameworkStrategy = this.frameworkStrategies[this.framework];
+    this.logger = new Logger(ArgParser.name);
+  }
 
   /**
-   * Gets file metadata for a given file name, parent arguments, and path.
+   * Gets file metadata for a given file name
    */
   getFileMetadata(fileName: string, parentArgs: Arg[], parentPath: string) {
     const argStrategy = this.getMatchingArgStrategy(fileName);
@@ -26,6 +33,18 @@ export class SvelteKitStrategy implements FrameworkStrategy {
     const pathSegment = argStrategy.getPathSegment(arg);
     const fullPath = parentPath + pathSegment;
     const functionValue = this.getFunctionValue(fullPath, newArgs);
+
+    this.logger.debug("Generating file metadata", {
+      parentPath,
+      parentArgs,
+      fileName,
+      argStrategyName: argStrategy.name,
+      arg,
+      newArgs,
+      pathSegment,
+      fullPath,
+      functionValue,
+    });
 
     return {
       currentArgs: newArgs,
@@ -40,9 +59,9 @@ export class SvelteKitStrategy implements FrameworkStrategy {
    */
   private getMatchingArgStrategy(fileName: string): ArgStrategy {
     return (
-      Object.values(this.argStrategies).find((strategy) =>
+      this.frameworkStrategy.argStrategies.find((strategy) =>
         strategy.isMatching(fileName),
-      ) || this.argStrategies[ArgType.STATIC]
+      ) || this.frameworkStrategy.defaultArgStrategy
     );
   }
 
@@ -69,12 +88,4 @@ export class SvelteKitStrategy implements FrameworkStrategy {
 
     return routeFunction;
   }
-}
-
-enum ArgType {
-  DYNAMIC_OPTIONAL,
-  DYNAMIC_REQUIRED,
-  DYNAMIC_REST,
-  GROUP,
-  STATIC,
 }

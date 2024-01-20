@@ -1,6 +1,6 @@
 dist
 node_modules
-test/routes.ts
-test/test.ts
-test/routes
-test/routes2
+# test/routes.ts
+# test/test.ts
+# test/routes
+# test/routes2

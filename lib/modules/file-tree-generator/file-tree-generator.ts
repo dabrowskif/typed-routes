@@ -1,16 +1,21 @@
 import * as fs from "fs";
 import * as path from "path";
-import { Logger } from "../utils/logger";
+import { Logger } from "../../utils/logger/logger";
+import type { FileTree } from "./types";
 
 export class FileTreeGenerator {
-  constructor(private readonly logger: Logger) {}
+  private readonly logger: Logger;
+
+  constructor() {
+    this.logger = new Logger(FileTreeGenerator.name);
+  }
 
   /**
    * Generates a file tree from the provided directory path.
    */
   generate(dirPath: string): FileTree {
+    this.logger.info("Generating file tree from directory");
     const absoluteDirPath = this.getAbsoluteDirPath(dirPath);
-
     this.logger.info(`Directory path: ${absoluteDirPath}`);
 
     if (!this.isDirectory(absoluteDirPath)) {
@@ -19,11 +24,11 @@ export class FileTreeGenerator {
       process.exit(1);
     }
 
-    this.logger.info("Generating file tree...\n");
+    this.logger.info("Generating file tree...");
 
     const fileTree = this.getDirectoryFileTree(absoluteDirPath);
 
-    this.logger.info(`\nFile tree has been generated`);
+    this.logger.info(`File tree has been generated`);
 
     return fileTree;
   }
@@ -68,13 +73,10 @@ export class FileTreeGenerator {
     try {
       return fs.statSync(path).isDirectory();
     } catch (e) {
-      throw new Error(
+      this.logger.fatal(
         "Error while trying to check routes directory path. Please ensure that you provided existing path.",
       );
+      process.exit(1);
     }
   }
 }
-
-export type FileTree = {
-  [key: string]: FileTree;
-} | null;
