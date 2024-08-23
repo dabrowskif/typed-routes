@@ -1,6 +1,7 @@
 import * as fns from "date-fns";
 import chalk from "chalk";
-import { LogDetails, LogLevel, LogsDetailsMap } from "./types";
+import { LogLevel } from "./types";
+import { PROGRAM_OPTIONS } from "../../modules/program/cli/cli";
 
 export class Logger {
   private readonly colors: Record<LogLevel, any> = {
@@ -10,41 +11,32 @@ export class Logger {
     ERROR: chalk.red,
     FATAL: chalk.bgRed,
   };
-  private readonly logDetails: LogDetails;
+  private readonly verbose: boolean;
 
-  constructor(private readonly name: string = "Default") {
-    // TODO: change DEBUG to be dynamic based on program args
-    this.logDetails = LogsDetailsMap.DEBUG;
+  constructor(private readonly name: string) {
+    this.verbose = PROGRAM_OPTIONS.verbose;
   }
 
   debug(message: string, object?: Record<string, any>) {
-    if (this.logDetails.value <= 0) {
+    if (this.verbose) {
       this.log(message, "DEBUG", object);
     }
   }
 
   info(message: string, object?: Record<string, any>) {
-    if (this.logDetails.value <= 1) {
-      this.log(message, "INFO", object);
-    }
+    this.log(message, "INFO", object);
   }
 
   warn(message: string, object?: Record<string, any>) {
-    if (this.logDetails.value <= 2) {
-      this.log(message, "WARN", object);
-    }
+    this.log(message, "WARN", object);
   }
 
   error(message: string, object?: Record<string, any>) {
-    if (this.logDetails.value <= 3) {
-      this.log(message, "ERROR", object);
-    }
+    this.log(message, "ERROR", object);
   }
 
   fatal(message: string, object?: Record<string, any>) {
-    if (this.logDetails.value <= 4) {
-      this.log(message, "FATAL", object);
-    }
+    this.log(message, "FATAL", object);
   }
 
   private log(
@@ -52,19 +44,24 @@ export class Logger {
     logLevel: LogLevel,
     object?: Record<string, any>,
   ) {
+    let logOutput = "";
+
+    if (this.verbose) {
+      logOutput += `${chalk.gray(this.getDate())} `;
+    }
+
+    logOutput += this.colors[logLevel]("TypedRoutes");
+
+    if (this.verbose) {
+      logOutput += chalk.yellow(` - [${this.name}] - `);
+    }
+
+    logOutput += this.colors[logLevel](`[${logLevel}] - ${message}`);
+
     if (object) {
-      return console.log(
-        chalk.gray(this.getDate()),
-        chalk.yellow(`TypedRoutes - [${this.name}] -`),
-        this.colors[logLevel](`[${logLevel}] - ${message}`),
-        object,
-      );
+      console.log(logOutput, object);
     } else {
-      return console.log(
-        chalk.gray(this.getDate()),
-        chalk.yellow(`TypedRoutes - [${this.name}] -`),
-        this.colors[logLevel](`[${logLevel}] - ${message}`),
-      );
+      console.log(logOutput);
     }
   }
 

@@ -36,7 +36,9 @@ export const moduleSystem = new Option(
   .choices(Object.values(ModuleSystem))
   .default(ModuleSystem.ES6);
 
-export const verboseLogging = new Option(
+export const verbose = new Option(
   "-v, --verbose <boolean>",
   "Enable verbose logging",
-).default(false);
+)
+  .default(false)
+  .argParser(Boolean);

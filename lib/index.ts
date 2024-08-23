@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 
+import { PROGRAM_OPTIONS } from "./modules/program/cli/cli";
 import { Program } from "./modules/program/program";
 
-new Program(process.argv).run();
+new Program(PROGRAM_OPTIONS).run();

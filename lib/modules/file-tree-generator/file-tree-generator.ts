@@ -14,17 +14,14 @@ export class FileTreeGenerator {
    * Generates a file tree from the provided directory path.
    */
   generate(dirPath: string): FileTree {
-    this.logger.info("Generating file tree from directory");
+    this.logger.info("Generating file tree...");
     const absoluteDirPath = this.getAbsoluteDirPath(dirPath);
-    this.logger.info(`Directory path: ${absoluteDirPath}`);
+    this.logger.debug(`Directory path: ${absoluteDirPath}`);
 
     if (!this.isDirectory(absoluteDirPath)) {
-      const message = "File at provided path is not a directory";
-      this.logger.error(message);
+      this.logger.error("File at provided path is not a directory");
       process.exit(1);
     }
-
-    this.logger.info("Generating file tree...");
 
     const fileTree = this.getDirectoryFileTree(absoluteDirPath);
 
@@ -43,13 +40,13 @@ export class FileTreeGenerator {
    * Recursively builds a file tree from a directory.
    */
   private getDirectoryFileTree(currentDirPath: string): FileTree {
-    this.logger.info(`Entering ${currentDirPath}`);
+    this.logger.debug(`Entering ${currentDirPath}`);
     const fileNames = this.getDirectoryFilesNames(currentDirPath);
 
     return fileNames.reduce(
       (fileTree, fileName) => {
         const filePath = this.getFilePath(currentDirPath, fileName);
-        this.logger.info(`Generating ${fileName}`);
+        this.logger.debug(`Generating ${fileName}`);
 
         fileTree[fileName] = this.isDirectory(filePath)
           ? this.getDirectoryFileTree(filePath)
