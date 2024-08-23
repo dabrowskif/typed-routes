@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.5.0](https://github.com/dabrowskif/typed-routes/compare/v0.4.1...v0.5.0) (2024-08-23)
+
+
+### Features
+
+* better logging, adjust CLI and types ([32cb387](https://github.com/dabrowskif/typed-routes/commit/32cb387294d0cfcce26491e6f2d9684c374989f1))
+
+
+### Bug Fixes
+
+* release please workflow ([3a04c21](https://github.com/dabrowskif/typed-routes/commit/3a04c211c5845312843b4374e1330ffe25b0d28f))
+
 ## [0.4.1](https://github.com/dabrowskif/typed-routes/compare/v0.4.0...v0.4.1) (2024-01-15)
 
 
