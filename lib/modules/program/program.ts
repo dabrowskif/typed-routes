@@ -2,25 +2,22 @@ import * as path from "path";
 import * as fs from "fs";
 import { FileTreeGenerator } from "../file-tree-generator/file-tree-generator";
 import { RoutesGenerator } from "../routes-generator/routes-generator";
-import { CLI } from "./cli/cli";
 import type { ProgramOptions } from "./cli/types";
 import { Logger } from "../../utils/logger/logger";
 
 export class Program {
   private readonly logger: Logger;
-  private readonly options: ProgramOptions;
   private readonly fileTreeGenerator: FileTreeGenerator;
   private readonly routesGenerator: RoutesGenerator;
 
-  constructor(args: string[]) {
+  constructor(private readonly options: ProgramOptions) {
     this.logger = new Logger(Program.name);
-    this.options = new CLI().getProgramOptions(args);
     this.fileTreeGenerator = new FileTreeGenerator();
     this.routesGenerator = new RoutesGenerator(this.options.framework);
   }
 
   run() {
-    this.logger.info("Running with options", this.options);
+    this.logger.debug("Running with options", this.options);
 
     const {
       rootDirectory,
@@ -54,9 +51,8 @@ export class Program {
       options.outputDirectory,
       options.outputFileName,
     );
-    this.logger.info(`Saving generated routes to ${finalFilePath}`);
     fs.writeFileSync(finalFilePath, routes, "utf-8");
-    this.logger.info(`Routes saved.`);
+    this.logger.info(`Routes saved to ${finalFilePath}`);
   }
 
   private handleError(error: any) {

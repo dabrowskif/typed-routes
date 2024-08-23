@@ -2,7 +2,7 @@ export type ProgramOptions = {
   rootDirectory: string;
   outputDirectory: string;
   outputFileName: string;
-  verboseLogging: boolean;
+  verbose: boolean;
   functionName: string;
   moduleSystem: ModuleSystem;
   framework: Framework;

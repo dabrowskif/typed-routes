@@ -7,20 +7,16 @@ import {
   outputDirectory,
   outputFileName,
   rootDirectory,
-  verboseLogging,
+  verbose,
 } from "./options";
 
-export class CLI {
-  getProgramOptions(args: string[]): ProgramOptions {
-    return new Command()
-      .addOption(rootDirectory)
-      .addOption(outputDirectory)
-      .addOption(outputFileName)
-      .addOption(verboseLogging)
-      .addOption(functionName)
-      .addOption(moduleSystem)
-      .addOption(framework)
-      .parse(args)
-      .opts<ProgramOptions>();
-  }
-}
+export const PROGRAM_OPTIONS = new Command()
+  .addOption(rootDirectory)
+  .addOption(outputDirectory)
+  .addOption(outputFileName)
+  .addOption(verbose)
+  .addOption(functionName)
+  .addOption(moduleSystem)
+  .addOption(framework)
+  .parse(process.argv)
+  .opts<ProgramOptions>();

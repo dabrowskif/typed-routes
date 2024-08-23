@@ -28,9 +28,9 @@ export class ArgParser {
    */
   getFileMetadata(fileName: string, parentArgs: Arg[], parentPath: string) {
     const argStrategy = this.getMatchingArgStrategy(fileName);
-    const arg = argStrategy.extractArg(fileName);
-    const newArgs = arg ? [...parentArgs, arg] : parentArgs;
-    const pathSegment = argStrategy.getPathSegment(arg);
+    const argToAdd = argStrategy.extractArg(fileName);
+    const newArgs = argToAdd ? [...parentArgs, argToAdd] : parentArgs;
+    const pathSegment = argStrategy.getPathSegment(argToAdd);
     const fullPath = parentPath + pathSegment;
     const functionValue = this.getFunctionValue(fullPath, newArgs);
 
@@ -39,7 +39,7 @@ export class ArgParser {
       parentArgs,
       fileName,
       argStrategyName: argStrategy.name,
-      arg,
+      arg: argToAdd,
       newArgs,
       pathSegment,
       fullPath,
@@ -47,7 +47,7 @@ export class ArgParser {
     });
 
     return {
-      currentArgs: newArgs,
+      args: newArgs,
       fullPath,
       functionValue,
     };
