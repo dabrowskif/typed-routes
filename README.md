@@ -1,12 +1,11 @@
 # Typed Route Generator for Frontend Frameworks
 
-This Node.js package provides a route generation tool designed for Front-end meta frameworks that use file-based routing projects. It simplifies the process of creating typed route structures by automatically converting file system-based routing into a JavaScript object, enhancing type safety and improving developer experience.
+Typed Routes provides a route generation tool for Frontend meta frameworks that use file-based routing projects, such as SvelteKit or NextJS. It simplifies the process of creating typed route structures by automatically converting file system-based routing into a JavaScript object, enhancing type safety and improving developer experience.
 
 ## Features
 
 - Automated Route Generation: Converts the routes (ex. `/routes` in SvelteKit) directory into a JavaScript object, mirroring the file system structure
-- Dynamic Route Support: Handles dynamic, optional, and rest route parameters
-- Multiple Module System Support: Compatible with both CommonJS and ES6 module systems
+- Dynamic Route Support: Handles dynamic, optional and rest route parameters
 - Command-Line Interface: Easy-to-use CLI for quick and seamless route generation
 
 ## Supported Frameworks
@@ -22,13 +21,13 @@ This Node.js package provides a route generation tool designed for Front-end met
 Install the package using npm:
 
 ```bash
-npm install @dabrowskif/typed-routes
+npm install --save-dev @dabrowskif/typed-routes
 ```
 
 Or using yarn:
 
 ```bash
-yarn add @dabrowskif/typed-routes
+yarn add --dev @dabrowskif/typed-routes
 ```
 
 ## Usage
@@ -44,16 +43,22 @@ Here are the available options you can use with the Typed Route Generator:
 - `-od, --output-directory <string>`: Output directory for the generated file.
 - `-of, --output-file-name <string>`: Name for the generated routes file.
 - `-fn, --function-name <name>`: Customize the function name used in the route object.
-- `--module-system <ModuleSystem>`: Select the module system. Available options:
+- `-m, --module-system <ModuleSystem>`: Select the module system. Available options:
   - `es6`
   - `commonjs`
 - `-v, --verbose <boolean>`: Enable verbose logging
 
-#### Minimal example
+### Options
 
-```bash
-npx @dabrowskif/typed-routes -f SvelteKit -r src/routes
-```
+| Option                          | Description                                            | Required | Default     | Possible Values         |
+|---------------------------------|--------------------------------------------------------|----------|-------------|-------------------------|
+| `-r, --root-directory <string>` | Path of your routes directory.                         | **Yes**  | None        | Any valid path          |
+| `-f, --framework <Framework>`   | Choose the framework.                                  | **Yes**  | None        | `SvelteKit`, `Nextjs`   |
+| `-od, --output-directory <string>` | Output directory for the generated file.            | No       | Current dir | Any valid path          |
+| `-of, --output-file-name <string>` | Name for the generated routes file.                | No       | `routes.js` | Any valid file name     |
+| `-fn, --function-name <name>`   | Customize the function name used in the route object.  | No       | `getRoute`  | Any valid function name |
+| `-m, --module-system <ModuleSystem>` | Select the module system.                         | No       | `es6`       | `es6`, `commonjs`       |
+| `-v, --verbose <boolean>`       | Enable verbose logging.                                | No       | `false`     | `true`, `false`         |
 
 ### CLI Usage
 
@@ -67,25 +72,32 @@ Alternatively, if you have installed it as a dependency in your project, you can
 
 ```
 scripts": {
-  "generate-routes": "typed-routes -fr SvelteKit -r src/routes"
+    ...
+    "generate-typesafe-routes": "typed-routes -f SvelteKit -r src/routes"
+    ...
 }
 ```
 
-Then, you can generate routes with:
+Then, you can generate routes runnint this script:
 
 ```bash
 npm run generate-routes
 ```
 
-For a more integrated development experience, consider running this script concurrently with your framework's development server. Tools like `concurrently` or `npm-run-all` can be used to run multiple npm scripts simultaneously. For instance:
+For a more integrated development experience, consider running this script concurrently with your framework's development server. Tools like `nodemon` or `concurrently` can be used to run multiple npm scripts simultaneously.
+
+#### Example with nodemon
+
+(keep in mind you have to have nodemon installed)
 
 ```
-"scripts": {
-  "dev": "concurrently "npm run generate-routes -- --watch" "npm run dev""
+scripts": {
+    ...
+    "generate-typesafe-routes": "typed-routes -f SvelteKit -r src/routes",
+    "generate-typesafe-routes:watch": "nodemon --exec npm run generate-typesafe-routes --watch src/routes"
+    ...
 }
 ```
-
-This setup will regenerate routes on-the-fly as your file structure changes, alongside your normal development server.
 
 ## TODO
 
@@ -93,29 +105,25 @@ The following features are planned:
 
 1. **More Frameworks Support**
 
-2. **CLI Enhancements**
-
-   - Current CLI usage experience is not be the most satisfying thing I can dream of. Improving it will ensure easiness and well documented integrations for upcoming features.
-
-3. **Type-Only Route Definitions**
+2. **Type-Only Route Definitions**
 
    - Evolve the current route functions to support type-only definitions that adds minimal runtime overhead.
      - Simple functions with typed parameters for general use.
      - Framework-specific enhancements, such as type-safe wrappers for SvelteKit's goto function or Next.js's config hook
 
-4. **SvelteKit Segments Enhancement**
+3. **SvelteKit Segments Enhancement**
 
    - Incorporate support for SvelteKit's advanced routing features, including segment sorting and parameter encoding. This will align the Typed Route Generator with SvelteKit's latest routing capabilities, allowing for more sophisticated route structures.
 
-5. **Custom Strategy Provider**
+4. **Custom Strategy Provider**
 
    - Implement functionality to allow defining custom strategies for route generation. This feature aims to provide greater flexibility and adaptability to specific project requirements.
 
-6. **Support for object-based arguments, instead of multiple arguments inside one function**
+5. **Support for object-based arguments, instead of multiple arguments inside one function**
 
    - Passing many arguments into heavily nested dynamic routes one by one is more or less an anti-pattern, so creating an option to make getter function a one-argument based with multiple properties is a good alternative.
 
-7. **Support for passing a query string**
+6. **Support for passing a query string**
    - Add a simple option to pass a query string into the function invocation in order to produce full and final route for usage.
    - This actually can be even typed, after creating specific file to look for, or scanning a main route file.
 
