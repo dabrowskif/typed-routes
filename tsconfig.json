@@ -10,8 +10,8 @@
     "declaration": true,
     "sourceMap": false,
     "strict": true,
-    "outDir": "./dist",
-    "rootDir": ".",
+    "outDir": "dist",
+    "rootDir": "lib",
     "strictNullChecks": true,
     "useUnknownInCatchVariables": false,
     "types": [

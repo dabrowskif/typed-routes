@@ -8,15 +8,22 @@ import {
   outputFileName,
   rootDirectory,
   verbose,
-} from "./options";
+} from "./cli-options";
 
-export const PROGRAM_OPTIONS = new Command()
-  .addOption(rootDirectory)
-  .addOption(outputDirectory)
-  .addOption(outputFileName)
-  .addOption(verbose)
-  .addOption(functionName)
-  .addOption(moduleSystem)
-  .addOption(framework)
-  .parse(process.argv)
-  .opts<ProgramOptions>();
+export class CLI {
+  /**
+   * Parses command line arguments and returns js object with all options passed
+   */
+  generateProgramOptions(args: string[]): ProgramOptions {
+    return new Command()
+      .addOption(rootDirectory)
+      .addOption(outputDirectory)
+      .addOption(outputFileName)
+      .addOption(verbose)
+      .addOption(functionName)
+      .addOption(moduleSystem)
+      .addOption(framework)
+      .parse(args)
+      .opts<ProgramOptions>();
+  }
+}

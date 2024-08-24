@@ -1,5 +1,5 @@
+import { PROGRAM_OPTIONS } from "../../modules/program/cli/program-options";
 import { LogLevel } from "./types";
-import { PROGRAM_OPTIONS } from "../../modules/program/cli/cli";
 
 export class Logger {
   private readonly colors: Record<LogLevel, string> = {
