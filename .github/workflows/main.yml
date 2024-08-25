@@ -1,3 +1,5 @@
+name: Main 
+
 on:
   push:
     branches:
@@ -6,8 +8,6 @@ on:
 permissions:
   contents: write
   pull-requests: write
-
-name: Main 
 
 jobs:
   release-please:
