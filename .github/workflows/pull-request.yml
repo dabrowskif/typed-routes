@@ -4,7 +4,8 @@ on:
   pull_request:
 
 jobs:
-  pre-checks:
+  check-code-quality:
+    name: 'Check code quality'
     runs-on: ubuntu-latest
     steps:
       - name: 'Checkout repo'

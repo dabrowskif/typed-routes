@@ -20,5 +20,5 @@ runs:
       # shell: bash
 
     - name: 'Install npm dependencies'
-      run: npm ci
+      run: npm ci --ignore-scripts
       shell: bash
