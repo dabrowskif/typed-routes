@@ -1,0 +1,20 @@
+name: 'Install NPM deps'
+description: 'Installs, using cache, npm dependencies for project'
+
+inputs:
+  node-version:
+    description: 'Version of node'
+    required: true
+
+runs:
+  using: 'composite'
+  steps:
+    - name: Setup node
+      uses: actions/setup-node@v4
+      with:
+        cache: "npm"
+        node-version: ${{ inputs.node-version }}
+
+    - name: 'Install npm dependencies'
+      run: npm ci --ignore-scripts
+      shell: 'bash' 
