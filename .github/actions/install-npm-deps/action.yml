@@ -1,0 +1,24 @@
+name: 'Install NPM deps'
+description: 'Installs, using cache, npm dependencies for project'
+
+runs:
+  using: 'composite'
+  steps:
+    # TODO: implement cache
+    # - name: 'Cache node modules'
+    #   id: cache-npm
+    #   uses: actions/cache@v4
+      # env:
+      #   cache-name: cache-node-modules
+      # with:
+      #   path: ~/.npm
+      #   key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+      #   restore-keys: |
+      #     ${{ runner.os }}-build-${{ env.cache-name }}-
+      #     ${{ runner.os }}-build-
+      #     ${{ runner.os }}-
+      # shell: bash
+
+    - name: 'Install npm dependencies'
+      run: npm ci
+      shell: bash
