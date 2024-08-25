@@ -1,7 +1,7 @@
-export type RequiredProgramOptions = {
+export interface RequiredProgramOptions {
   rootDirectory: string;
   framework: Framework;
-};
+}
 
 export type ProgramOptions = RequiredProgramOptions & {
   outputDirectory: string;

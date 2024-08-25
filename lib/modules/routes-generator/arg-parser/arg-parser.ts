@@ -1,11 +1,11 @@
+import { Logger } from "../../../utils/logger/logger";
+import { Framework } from "../../program/cli/types";
+import { SveltekitStrategy } from "./framework-strategies/sveltekit/sveltekit.strategy";
 import {
   type Arg,
-  type FrameworkStrategy,
   ArgStrategy,
+  type FrameworkStrategy,
 } from "./framework-strategies/types";
-import { SveltekitStrategy } from "./framework-strategies/sveltekit/sveltekit.strategy";
-import { Framework } from "../../program/cli/types";
-import { Logger } from "../../../utils/logger/logger";
 
 /**
  * Parses args from filenames depending on framework strategy

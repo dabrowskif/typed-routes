@@ -17,33 +17,29 @@ export class Logger {
     this.verbose = PROGRAM_OPTIONS.verbose;
   }
 
-  debug(message: string, object?: Record<string, any>) {
+  debug(message: string, object?: unknown) {
     if (this.verbose) {
       this.log(message, "DEBUG", object);
     }
   }
 
-  info(message: string, object?: Record<string, any>) {
+  info(message: string, object?: unknown) {
     this.log(message, "INFO", object);
   }
 
-  warn(message: string, object?: Record<string, any>) {
+  warn(message: string, object?: unknown) {
     this.log(message, "WARN", object);
   }
 
-  error(message: string, object?: Record<string, any>) {
+  error(message: string, object?: unknown) {
     this.log(message, "ERROR", object);
   }
 
-  fatal(message: string, object?: Record<string, any>) {
+  fatal(message: string, object?: unknown) {
     this.log(message, "FATAL", object);
   }
 
-  private log(
-    message: string,
-    logLevel: LogLevel,
-    object?: Record<string, any>,
-  ) {
+  private log(message: string, logLevel: LogLevel, object?: unknown) {
     let logOutput = "";
 
     if (this.verbose) {
@@ -68,7 +64,7 @@ export class Logger {
   private getDate(): string {
     const now = new Date();
 
-    const pad = (n: number, width: number = 2): string => {
+    const pad = (n: number, width = 2): string => {
       return n.toString().padStart(width, "0");
     };
 

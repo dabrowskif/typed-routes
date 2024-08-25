@@ -1,24 +1,21 @@
 import {
   fakeProcessArgs,
   fakeRequiredProcessArgs,
-  fakeRequiredProgramOptions,
 } from "../../../../test/fixtures/cli";
-import { Framework, ModuleSystem } from "./types";
-import { InvalidArgumentError } from "commander";
 import { CLI } from "./cli";
+import { Framework, ModuleSystem } from "./types";
 
 describe("CLI", () => {
   let cli: CLI;
-  let requiredProgramOptions = fakeRequiredProgramOptions();
 
   beforeEach(() => {
     cli = new CLI();
-    requiredProgramOptions = fakeRequiredProgramOptions();
   });
 
   it("should return process.exit code as undefined because all required options are passed", () => {
     let exitCode: number | undefined = undefined;
-    (process as any).exit = (code: number) => {
+    // @ts-expect-error - for testing purposes
+    process.exit = (code: number) => {
       exitCode = code;
     };
 
@@ -51,7 +48,8 @@ describe("CLI", () => {
     "should return process.exit code as 1 because $label",
     async ({ args }) => {
       let exitCode: number | undefined = undefined;
-      (process as any).exit = (code: number) => {
+      // @ts-expect-error - for testing purposes
+      process.exit = (code: number) => {
         exitCode = code;
       };
 

@@ -1,4 +1,4 @@
-import { ProgramOptions, RequiredProgramOptions, ModuleSystem } from "./types";
+import { ModuleSystem, ProgramOptions, RequiredProgramOptions } from "./types";
 
 export const DEFAULT_PROGRAM_OPTIONS: Omit<
   ProgramOptions,

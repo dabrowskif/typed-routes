@@ -1,6 +1,7 @@
 import { Option } from "commander";
-import { ModuleSystem, Framework } from "./types";
+
 import { DEFAULT_PROGRAM_OPTIONS } from "./default-program-options";
+import { Framework, ModuleSystem } from "./types";
 
 export const rootDirectory = new Option(
   "-r, --root-directory <string>",

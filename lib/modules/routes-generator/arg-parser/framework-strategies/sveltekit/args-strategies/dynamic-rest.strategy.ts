@@ -29,6 +29,6 @@ export class DynamicRestArgStrategy implements ArgStrategy {
   }
 
   getPathSegment(arg: Arg) {
-    return `\$\{${arg.name}.length > 0 ? '/' + ${arg.name}.join('/') : ''\}`;
+    return `$\{${arg.name}.length > 0 ? '/' + ${arg.name}.join('/') : ''}`;
   }
 }

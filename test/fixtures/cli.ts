@@ -1,10 +1,11 @@
+import { faker } from "@faker-js/faker";
+
 import {
   Framework,
   ModuleSystem,
   ProgramOptions,
   RequiredProgramOptions,
 } from "../../lib/modules/program/cli/types";
-import { faker } from "@faker-js/faker";
 
 export const fakeRequiredProgramOptions = (
   data?: RequiredProgramOptions,
@@ -47,20 +48,20 @@ export const fakeProcessArgs = (
   args.push("-f", data.framework ?? options.framework);
 
   if (data.outputDirectory || options.outputDirectory) {
-    args.push("-od", (data.outputDirectory ?? options.outputDirectory)!);
+    args.push("-od", data.outputDirectory ?? options.outputDirectory);
   }
 
-  if (data.outputFileName || data.outputFileName) {
-    args.push("-of", (data.outputFileName ?? options.outputFileName)!);
+  if (data.outputFileName || options.outputFileName) {
+    args.push("-of", data.outputFileName ?? options.outputFileName);
   }
-  if (data.verbose !== undefined || data.verbose !== undefined) {
-    args.push("-v", String(data.verbose ?? options.verbose)!);
+  if (data.verbose !== undefined || options.verbose !== undefined) {
+    args.push("-v", String(data.verbose ?? options.verbose));
   }
-  if (data.functionName || data.functionName) {
-    args.push("-fn", (data.functionName ?? options.functionName)!);
+  if (data.functionName || options.functionName) {
+    args.push("-fn", data.functionName ?? options.functionName);
   }
-  if (data.moduleSystem || data.moduleSystem) {
-    args.push("-ms", (data.moduleSystem ?? options.moduleSystem)!);
+  if (data.moduleSystem || options.moduleSystem) {
+    args.push("-ms", data.moduleSystem ?? options.moduleSystem);
   }
 
   return args;

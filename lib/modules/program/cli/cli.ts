@@ -1,5 +1,5 @@
 import { Command } from "commander";
-import type { ProgramOptions } from "./types";
+
 import {
   framework,
   functionName,
@@ -9,6 +9,7 @@ import {
   rootDirectory,
   verbose,
 } from "./cli-options";
+import type { ProgramOptions } from "./types";
 
 export class CLI {
   /**

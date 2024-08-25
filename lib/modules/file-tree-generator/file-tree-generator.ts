@@ -1,5 +1,6 @@
 import * as fs from "fs";
 import * as path from "path";
+
 import { Logger } from "../../utils/logger/logger";
 import type { FileTree } from "./types";
 
@@ -69,7 +70,7 @@ export class FileTreeGenerator {
   private isDirectory(path: string): boolean {
     try {
       return fs.statSync(path).isDirectory();
-    } catch (e) {
+    } catch {
       this.logger.fatal(
         "Error while trying to check routes directory path. Please ensure that you provided existing path.",
       );

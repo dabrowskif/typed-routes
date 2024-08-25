@@ -29,6 +29,6 @@ export class DynamicRequiredArgStrategy implements ArgStrategy {
   }
 
   getPathSegment(arg: Arg) {
-    return `/\$\{${arg.name}\}`;
+    return `/$\{${arg.name}}`;
   }
 }

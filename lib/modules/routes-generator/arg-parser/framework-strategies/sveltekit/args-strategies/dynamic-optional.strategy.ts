@@ -29,6 +29,6 @@ export class DynamicOptionalArgStrategy implements ArgStrategy {
   }
 
   getPathSegment(arg: Arg) {
-    return `\$\{${arg.name} ? "/" + ${arg.name} : ""\}`;
+    return `$\{${arg.name} ? "/" + ${arg.name} : ""}`;
   }
 }

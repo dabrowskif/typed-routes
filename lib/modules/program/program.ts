@@ -1,9 +1,10 @@
-import * as path from "path";
 import * as fs from "fs";
+import * as path from "path";
+
+import { Logger } from "../../utils/logger/logger";
 import { FileTreeGenerator } from "../file-tree-generator/file-tree-generator";
 import { RoutesGenerator } from "../routes-generator/routes-generator";
 import type { ProgramOptions } from "./cli/types";
-import { Logger } from "../../utils/logger/logger";
 
 export class Program {
   private readonly logger: Logger;
@@ -55,8 +56,8 @@ export class Program {
     this.logger.info(`Routes saved to ${finalFilePath}`);
   }
 
-  private handleError(error: any) {
-    const errorMessage = error?.message;
+  private handleError(error: unknown) {
+    const errorMessage = this.extractErrorMessage(error);
 
     if (errorMessage) {
       this.logger.error(errorMessage, error);
@@ -66,5 +67,11 @@ export class Program {
     }
 
     process.exit(1);
+  }
+
+  private extractErrorMessage(error: unknown) {
+    return typeof error === "object" && error && "message" in error
+      ? (error?.message as string)
+      : "";
   }
 }
