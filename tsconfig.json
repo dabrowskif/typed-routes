@@ -3,17 +3,17 @@
     "esModuleInterop": true,
     "module": "commonjs",
     "lib": [
-      "ES2022"
+      "ESNEXT"
     ],
-    "target": "es2022",
+    "target": "es6",
     "moduleResolution": "node",
     "declaration": true,
     "sourceMap": false,
     "strict": true,
+    "strictNullChecks": true,
     "outDir": "dist",
     "rootDir": "lib",
-    "strictNullChecks": true,
-    "useUnknownInCatchVariables": false,
+    "useUnknownInCatchVariables": true,
     "types": [
       "node",
       "jest"
@@ -23,9 +23,6 @@
     "lib/**/*"
   ],
   "exclude": [
-    "node_modules",
-    "dist",
-    "test",
     "**/*.spec.ts"
   ]
 }
