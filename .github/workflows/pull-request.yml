@@ -5,8 +5,11 @@ on:
 
 jobs:
   check-code-quality:
-    name: 'Check code quality'
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node: [ 16, 18, 20, 22 ]
+    name: 'Check code quality for node ${{ matrix.node }}'
     steps:
       - name: 'Checkout repo'
         uses: actions/checkout@v4
