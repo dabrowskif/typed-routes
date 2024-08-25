@@ -1,10 +1,10 @@
-import * as fs from "fs";
-import * as path from "path";
+import * as fs from 'fs';
+import * as path from 'path';
 
-import { Logger } from "../../utils/logger/logger";
-import { FileTreeGenerator } from "../file-tree-generator/file-tree-generator";
-import { RoutesGenerator } from "../routes-generator/routes-generator";
-import type { ProgramOptions } from "./cli/types";
+import { Logger } from '../../utils/logger/logger';
+import { FileTreeGenerator } from '../file-tree-generator/file-tree-generator';
+import { RoutesGenerator } from '../routes-generator/routes-generator';
+import type { ProgramOptions } from './cli/types';
 
 export class Program {
   private readonly logger: Logger;
@@ -18,15 +18,9 @@ export class Program {
   }
 
   run() {
-    this.logger.debug("Running with options", this.options);
+    this.logger.debug('Running with options', this.options);
 
-    const {
-      rootDirectory,
-      moduleSystem,
-      functionName,
-      outputDirectory,
-      outputFileName,
-    } = this.options;
+    const { rootDirectory, moduleSystem, functionName, outputDirectory, outputFileName } = this.options;
 
     try {
       const fileTree = this.fileTreeGenerator.generate(rootDirectory);
@@ -44,15 +38,9 @@ export class Program {
     }
   }
 
-  private writeRoutesToFile(
-    routes: string,
-    options: { outputDirectory: string; outputFileName: string },
-  ) {
-    const finalFilePath = path.join(
-      options.outputDirectory,
-      options.outputFileName,
-    );
-    fs.writeFileSync(finalFilePath, routes, "utf-8");
+  private writeRoutesToFile(routes: string, options: { outputDirectory: string; outputFileName: string }) {
+    const finalFilePath = path.join(options.outputDirectory, options.outputFileName);
+    fs.writeFileSync(finalFilePath, routes, 'utf-8');
     this.logger.info(`Routes saved to ${finalFilePath}`);
   }
 
@@ -62,7 +50,7 @@ export class Program {
     if (errorMessage) {
       this.logger.error(errorMessage, error);
     } else {
-      this.logger.error("An unexpected error has occured.");
+      this.logger.error('An unexpected error has occured.');
       throw error;
     }
 
@@ -70,8 +58,6 @@ export class Program {
   }
 
   private extractErrorMessage(error: unknown) {
-    return typeof error === "object" && error && "message" in error
-      ? (error?.message as string)
-      : "";
+    return typeof error === 'object' && error && 'message' in error ? (error?.message as string) : '';
   }
 }

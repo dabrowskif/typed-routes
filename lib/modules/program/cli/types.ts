@@ -12,11 +12,11 @@ export type ProgramOptions = RequiredProgramOptions & {
 };
 
 export enum Framework {
-  SVELTEKIT = "sveltekit",
+  SVELTEKIT = 'sveltekit',
   // NEXTJS = "nextjs",
 }
 
 export enum ModuleSystem {
-  ES6 = "es6",
-  COMMONJS = "commonjs",
+  ES6 = 'es6',
+  COMMONJS = 'commonjs',
 }

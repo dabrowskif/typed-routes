@@ -1,4 +1,4 @@
-import { type Arg, ArgStrategy } from "../../types";
+import { type Arg, ArgStrategy } from '../../types';
 
 export class StaticArgStrategy implements ArgStrategy {
   readonly name = StaticArgStrategy.name;
@@ -15,6 +15,6 @@ export class StaticArgStrategy implements ArgStrategy {
   }
 
   getPathSegment(arg: Arg) {
-    return "/" + arg.name;
+    return '/' + arg.name;
   }
 }

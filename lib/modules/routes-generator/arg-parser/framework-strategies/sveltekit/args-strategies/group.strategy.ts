@@ -1,4 +1,4 @@
-import { type Arg, ArgStrategy } from "../../types";
+import { type Arg, ArgStrategy } from '../../types';
 
 export class GroupArgStrategy implements ArgStrategy {
   readonly name = GroupArgStrategy.name;
@@ -12,11 +12,11 @@ export class GroupArgStrategy implements ArgStrategy {
     // INFO: no logic here as sveltekit group arg has no impact on route
     return {
       isDynamic: false,
-      name: "",
+      name: '',
     };
   }
 
   getPathSegment(_arg: Arg) {
-    return "";
+    return '';
   }
 }
