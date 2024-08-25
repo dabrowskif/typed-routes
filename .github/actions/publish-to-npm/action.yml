@@ -1,0 +1,16 @@
+name: Publish library to npm
+description: Publishes version specified by release please to public npm repository.
+
+inputs:
+  npm_auth_token:
+    description: NPM auth token needed for publishing
+    required: true
+
+runs:
+  using: composite
+  steps:
+    - name: Publish to NPM 
+      run: npm publish --access public
+      shell: bash 
+      env:
+        NODE_AUTH_TOKEN: ${{ inputs.npm_auth_token }}

@@ -1,0 +1,44 @@
+on:
+  push:
+    branches:
+      - master
+
+permissions:
+  contents: write
+  pull-requests: write
+
+name: Main 
+
+jobs:
+  release-please:
+    name: Release Please
+    runs-on: ubuntu-latest
+    outputs:
+      releases_created: ${{ steps.release-please.outputs.releases_created }}
+    steps:
+      - id: release-please
+        name: Release please
+        uses: googleapis/release-please-action@v4
+        with:
+          token: ${{ secrets.GHA_PAT }}
+          release-type: node
+
+  check-code-quality:
+    name: Check code quality
+    uses: ./.github/workflows/check-code-quality.yml
+    needs: release-please
+    if: needs.release-please.outputs.releases_created == 'true' 
+
+  publish-to-npm:
+    name: Publish to NPM
+    runs-on: ubuntu-latest
+    needs: check-code-quality
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup node
+        uses: ./.github/actions/setup-node
+      - name: Publish to NPM
+        uses:  ./.github/actions/publish-to-npm
+        with:
+          npm_auth_token: ${{ secrets.NPM_AUTH_TOKEN }}

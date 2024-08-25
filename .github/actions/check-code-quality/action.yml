@@ -1,17 +1,17 @@
-name: 'Check code quality'
-description: 'Run pre-checks (linting, formatting) and tests (unit) for project'
+name: Check code quality
+description: Run pre-checks (linting, formatting) and tests (unit) for project
 
 runs:
-  using: 'composite'
+  using: composite
   steps:
-    - name: 'Check linting'
+    - name: Check linting
       run: npm run lint:ci
       shell: bash
 
-    - name: 'Check formatting'
+    - name: Check formatting
       run: npm run format:ci
       shell: bash
 
-    - name: 'Run unit tests'
+    - name: Run unit tests
       run: npm run test
       shell: bash

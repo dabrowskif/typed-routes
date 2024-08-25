@@ -1,20 +1,17 @@
-name: 'Install NPM deps'
-description: 'Installs, using cache, npm dependencies for project'
+name: Install NPM deps
+description: Installs, using cache, npm dependencies for project
 
-inputs:
-  node-version:
-    description: 'Version of node'
-    required: true
 
 runs:
-  using: 'composite'
+  using: composite
   steps:
     - name: Setup node
       uses: actions/setup-node@v4
       with:
-        cache: "npm"
-        node-version: ${{ inputs.node-version }}
+        cache: npm
+        node-version: 22
+        registry-url: https://registry.npmjs.org
 
-    - name: 'Install npm dependencies'
-      run: npm ci --ignore-scripts
-      shell: 'bash' 
+    - name: Install npm dependencies
+      run: npm ci
+      shell: bash 

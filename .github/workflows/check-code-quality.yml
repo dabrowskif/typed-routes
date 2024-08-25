@@ -1,21 +1,20 @@
-name: 'Pull request'
+name: Pull request
 
 on:
   pull_request:
+  workflow_call:
 
 jobs:
   check-code-quality:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node: [ 16, 18, 20, 22 ]
-    name: 'Check code quality for node ${{ matrix.node }}'
+        node: [ 18, 20, 22 ]
+    name: Check code quality for node ${{ matrix.node }}
     steps:
-      - name: 'Checkout repo'
+      - name: Checkout
         uses: actions/checkout@v4
-
-      - name: 'Setup node'
+      - name: Setup node
         uses: ./.github/actions/setup-node
-
-      - name: 'Check code quality'
+      - name: Check code quality
         uses: ./.github/actions/check-code-quality
