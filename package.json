@@ -12,7 +12,8 @@
     "test": "jest",
     "test:e2e": "tsc && node dist/index.js -r test/sveltekit-tests/test1/routes -f sveltekit",
     "test:e2e:verbose": "tsc && node dist/index.js -r test/sveltekit-tests/test1/routes -f sveltekit -v true",
-    "test:e2e:watch": "nodemon --exec npm run test:e2e --watch test/sveltekit-tests/test1/routes"
+    "test:e2e:watch": "nodemon --exec npm run test:e2e --watch test/sveltekit-tests/test1/routes",
+    "prepare": "husky"
   },
   "repository": {
     "type": "git",
