@@ -1,23 +1,14 @@
-import { faker } from "@faker-js/faker";
+import { faker } from '@faker-js/faker';
 
-import {
-  Framework,
-  ModuleSystem,
-  ProgramOptions,
-  RequiredProgramOptions,
-} from "../../lib/modules/program/cli/types";
+import { Framework, ModuleSystem, ProgramOptions, RequiredProgramOptions } from '../../lib/modules/program/cli/types';
 
-export const fakeRequiredProgramOptions = (
-  data?: RequiredProgramOptions,
-): RequiredProgramOptions => ({
+export const fakeRequiredProgramOptions = (data?: RequiredProgramOptions): RequiredProgramOptions => ({
   rootDirectory: faker.system.directoryPath(),
   framework: faker.helpers.enumValue(Framework),
   ...data,
 });
 
-export const fakeProgramOptions = (
-  data?: Partial<ProgramOptions>,
-): ProgramOptions => ({
+export const fakeProgramOptions = (data?: Partial<ProgramOptions>): ProgramOptions => ({
   ...fakeRequiredProgramOptions(),
   outputDirectory: faker.system.directoryPath(),
   outputFileName: faker.system.fileName(),
@@ -27,41 +18,37 @@ export const fakeProgramOptions = (
   ...data,
 });
 
-export const fakeRequiredProcessArgs = (
-  data: Partial<RequiredProgramOptions> = {},
-): string[] => {
-  const args = ["node", "script.js"];
+export const fakeRequiredProcessArgs = (data: Partial<RequiredProgramOptions> = {}): string[] => {
+  const args = ['node', 'script.js'];
 
-  args.push("-r", data.rootDirectory ?? faker.system.directoryPath());
-  args.push("-f", data.framework ?? faker.helpers.enumValue(Framework));
+  args.push('-r', data.rootDirectory ?? faker.system.directoryPath());
+  args.push('-f', data.framework ?? faker.helpers.enumValue(Framework));
 
   return args;
 };
 
-export const fakeProcessArgs = (
-  data: Partial<ProgramOptions> = {},
-): string[] => {
-  const args = ["node", "script.js"];
+export const fakeProcessArgs = (data: Partial<ProgramOptions> = {}): string[] => {
+  const args = ['node', 'script.js'];
   const options = fakeProgramOptions();
 
-  args.push("-r", data.rootDirectory ?? options.rootDirectory);
-  args.push("-f", data.framework ?? options.framework);
+  args.push('-r', data.rootDirectory ?? options.rootDirectory);
+  args.push('-f', data.framework ?? options.framework);
 
   if (data.outputDirectory || options.outputDirectory) {
-    args.push("-od", data.outputDirectory ?? options.outputDirectory);
+    args.push('-od', data.outputDirectory ?? options.outputDirectory);
   }
 
   if (data.outputFileName || options.outputFileName) {
-    args.push("-of", data.outputFileName ?? options.outputFileName);
+    args.push('-of', data.outputFileName ?? options.outputFileName);
   }
   if (data.verbose !== undefined || options.verbose !== undefined) {
-    args.push("-v", String(data.verbose ?? options.verbose));
+    args.push('-v', String(data.verbose ?? options.verbose));
   }
   if (data.functionName || options.functionName) {
-    args.push("-fn", data.functionName ?? options.functionName);
+    args.push('-fn', data.functionName ?? options.functionName);
   }
   if (data.moduleSystem || options.moduleSystem) {
-    args.push("-ms", data.moduleSystem ?? options.moduleSystem);
+    args.push('-ms', data.moduleSystem ?? options.moduleSystem);
   }
 
   return args;
