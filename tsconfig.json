@@ -3,9 +3,9 @@
     "esModuleInterop": true,
     "module": "commonjs",
     "lib": [
-      "ESNEXT"
+      "esnext"
     ],
-    "target": "es6",
+    "target": "esnext",
     "moduleResolution": "node",
     "declaration": true,
     "sourceMap": false,
