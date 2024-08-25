@@ -1,8 +1,8 @@
-import * as fs from "fs";
-import * as path from "path";
+import * as fs from 'fs';
+import * as path from 'path';
 
-import { Logger } from "../../utils/logger/logger";
-import type { FileTree } from "./types";
+import { Logger } from '../../utils/logger/logger';
+import type { FileTree } from './types';
 
 export class FileTreeGenerator {
   private readonly logger: Logger;
@@ -15,12 +15,12 @@ export class FileTreeGenerator {
    * Generates a file tree from the provided directory path.
    */
   generate(dirPath: string): FileTree {
-    this.logger.info("Generating file tree...");
+    this.logger.info('Generating file tree...');
     const absoluteDirPath = this.getAbsoluteDirPath(dirPath);
     this.logger.debug(`Directory path: ${absoluteDirPath}`);
 
     if (!this.isDirectory(absoluteDirPath)) {
-      this.logger.error("File at provided path is not a directory");
+      this.logger.error('File at provided path is not a directory');
       process.exit(1);
     }
 
@@ -32,9 +32,7 @@ export class FileTreeGenerator {
   }
 
   private getAbsoluteDirPath(dirPath: string): string {
-    return path.isAbsolute(dirPath)
-      ? dirPath
-      : path.resolve(process.cwd(), dirPath);
+    return path.isAbsolute(dirPath) ? dirPath : path.resolve(process.cwd(), dirPath);
   }
 
   /**
@@ -49,9 +47,7 @@ export class FileTreeGenerator {
         const filePath = this.getFilePath(currentDirPath, fileName);
         this.logger.debug(`Generating ${fileName}`);
 
-        fileTree[fileName] = this.isDirectory(filePath)
-          ? this.getDirectoryFileTree(filePath)
-          : null;
+        fileTree[fileName] = this.isDirectory(filePath) ? this.getDirectoryFileTree(filePath) : null;
 
         return fileTree;
       },
@@ -72,7 +68,7 @@ export class FileTreeGenerator {
       return fs.statSync(path).isDirectory();
     } catch {
       this.logger.fatal(
-        "Error while trying to check routes directory path. Please ensure that you provided existing path.",
+        'Error while trying to check routes directory path. Please ensure that you provided existing path.',
       );
       process.exit(1);
     }

@@ -1,4 +1,4 @@
-import { Command } from "commander";
+import { Command } from 'commander';
 
 import {
   framework,
@@ -8,8 +8,8 @@ import {
   outputFileName,
   rootDirectory,
   verbose,
-} from "./cli-options";
-import type { ProgramOptions } from "./types";
+} from './cli-options';
+import type { ProgramOptions } from './types';
 
 export class CLI {
   /**

@@ -38,7 +38,7 @@ export type Arg = {
   | {
       isDynamic: true;
       // TODO: implement number type
-      type: "string" | "string[]";
+      type: 'string' | 'string[]';
       required: boolean;
     }
 );

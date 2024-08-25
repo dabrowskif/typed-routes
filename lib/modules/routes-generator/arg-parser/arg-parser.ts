@@ -1,11 +1,7 @@
-import { Logger } from "../../../utils/logger/logger";
-import { Framework } from "../../program/cli/types";
-import { SveltekitStrategy } from "./framework-strategies/sveltekit/sveltekit.strategy";
-import {
-  type Arg,
-  ArgStrategy,
-  type FrameworkStrategy,
-} from "./framework-strategies/types";
+import { Logger } from '../../../utils/logger/logger';
+import { Framework } from '../../program/cli/types';
+import { SveltekitStrategy } from './framework-strategies/sveltekit/sveltekit.strategy';
+import { type Arg, ArgStrategy, type FrameworkStrategy } from './framework-strategies/types';
 
 /**
  * Parses args from filenames depending on framework strategy
@@ -34,7 +30,7 @@ export class ArgParser {
     const fullPath = parentPath + pathSegment;
     const functionValue = this.getFunctionValue(fullPath, newArgs);
 
-    this.logger.debug("Generating file metadata", {
+    this.logger.debug('Generating file metadata', {
       parentPath,
       parentArgs,
       fileName,
@@ -59,9 +55,8 @@ export class ArgParser {
    */
   private getMatchingArgStrategy(fileName: string): ArgStrategy {
     return (
-      this.frameworkStrategy.argStrategies.find((strategy) =>
-        strategy.isMatching(fileName),
-      ) || this.frameworkStrategy.defaultArgStrategy
+      this.frameworkStrategy.argStrategies.find((strategy) => strategy.isMatching(fileName)) ||
+      this.frameworkStrategy.defaultArgStrategy
     );
   }
 
@@ -74,17 +69,12 @@ export class ArgParser {
       .map((arg) => {
         // TODO: unnecessary if statement, however typescript cannot  infer proper type based on previous .filter call
         if (arg.isDynamic) {
-          return arg.required
-            ? `${arg.name}: ${arg.type}`
-            : `${arg.name}: ${arg.type} | undefined`;
+          return arg.required ? `${arg.name}: ${arg.type}` : `${arg.name}: ${arg.type} | undefined`;
         }
       })
-      .join(", ");
+      .join(', ');
 
-    const routeFunction =
-      args.length > 0
-        ? `(${functionArgs}) => \`${fullPath}\``
-        : `() => \`${fullPath}\``;
+    const routeFunction = args.length > 0 ? `(${functionArgs}) => \`${fullPath}\`` : `() => \`${fullPath}\``;
 
     return routeFunction;
   }

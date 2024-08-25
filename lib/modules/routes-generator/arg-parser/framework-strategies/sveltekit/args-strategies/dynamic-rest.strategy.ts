@@ -1,5 +1,5 @@
-import { ArgExtractingError } from "../../errors";
-import { type Arg, ArgStrategy } from "../../types";
+import { ArgExtractingError } from '../../errors';
+import { type Arg, ArgStrategy } from '../../types';
 
 export class DynamicRestArgStrategy implements ArgStrategy {
   readonly name = DynamicRestArgStrategy.name;
@@ -15,14 +15,12 @@ export class DynamicRestArgStrategy implements ArgStrategy {
     const arg = match?.[1];
 
     if (!arg) {
-      throw new ArgExtractingError(
-        "Argument was matched properly, but did not extract properly.",
-      );
+      throw new ArgExtractingError('Argument was matched properly, but did not extract properly.');
     }
 
     return {
       isDynamic: true,
-      type: "string[]",
+      type: 'string[]',
       name: arg,
       required: true,
     };
