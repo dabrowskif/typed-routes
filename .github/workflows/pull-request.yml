@@ -16,7 +16,7 @@ jobs:
           node-version: latest
 
       - name: 'Install npm dependencies'
-        uses: ./.github/actions/install-npm-dependencies
+        uses: ./.github/actions/install-npm-deps
 
       - name: 'Check code quality'
         uses: ./.github/actions/check-code-quality
