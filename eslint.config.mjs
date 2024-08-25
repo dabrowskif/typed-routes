@@ -43,6 +43,7 @@ const prettierConfig = {
     'prettier/prettier': [
       'error',
       {
+        // WARN: update .prettierrc when updating this
         singleQuote: true,
         printWidth: 120,
       },

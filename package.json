@@ -5,15 +5,15 @@
   "author": "dabrowskif",
   "main": "./dist/index.js",
   "scripts": {
+    "prepare": "husky",
+    "lint": "eslint lib",
     "build": "tsc",
     "start": "node dist/index.js",
-    "test:watch": "jest --watch",
     "dev": "npm run build && npm run start",
     "test": "jest",
+    "test:watch": "jest --watch",
     "test:e2e": "tsc && node dist/index.js -r test/sveltekit-tests/test1/routes -f sveltekit",
-    "test:e2e:verbose": "tsc && node dist/index.js -r test/sveltekit-tests/test1/routes -f sveltekit -v true",
-    "test:e2e:watch": "nodemon --exec npm run test:e2e --watch test/sveltekit-tests/test1/routes",
-    "prepare": "husky"
+    "test:e2e:verbose": "tsc && node dist/index.js -r test/sveltekit-tests/test1/routes -f sveltekit -v true"
   },
   "repository": {
     "type": "git",
