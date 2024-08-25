@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.6.0](https://github.com/dabrowskif/typed-routes/compare/v0.5.0...v0.6.0) (2024-08-25)
+
+
+### Features
+
+* small types refactor, added jest, enhanced logger and readme ([a70148a](https://github.com/dabrowskif/typed-routes/commit/a70148afa9eb2751546a9547640fc93e6ec4c06d))
+
 ## [0.5.0](https://github.com/dabrowskif/typed-routes/compare/v0.4.1...v0.5.0) (2024-08-23)
 
 
