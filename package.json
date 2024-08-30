@@ -15,7 +15,8 @@
     "test": "jest",
     "test:watch": "jest --watch",
     "test:e2e": "tsc && node dist/index.js -r test/sveltekit-tests/test1/routes -f sveltekit",
-    "test:e2e:verbose": "tsc && node dist/index.js -r test/sveltekit-tests/test1/routes -f sveltekit -v true"
+    "test:e2e:verbose": "tsc && node dist/index.js -r test/sveltekit-tests/test1/routes -f sveltekit -v true",
+    "prepublishOnly": "npm run build"
   },
   "repository": {
     "type": "git",
@@ -33,6 +34,11 @@
   "bin": {
     "typed-routes": "index.js"
   },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
   "dependencies": {
     "commander": "^11.1.0"
   },
