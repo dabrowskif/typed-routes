@@ -1,6 +1,6 @@
 # Typed Route Generator for Frontend Frameworks
 
-Typed Routes provides a route generation tool for Frontend meta frameworks that use file-based routing projects, such as SvelteKit or NextJS. It simplifies the process of creating typed route structures by automatically converting file system-based routing into a JavaScript object, enhancing type safety and improving developer experience.
+Typed Routes provides a route generation tool for Frontend meta frameworks that use file-based routing projects, such as SvelteKit or NextJS. It simplifies the process of creating typed route structures by automatically converting filesystem-based routing into a JavaScript object, enhancing type safety and improving developer experience.
 
 ## Features
 
@@ -42,7 +42,7 @@ Here are the available options you can use with the Typed Route Generator:
 | `-f, --framework <Framework>`   | Framework for which to generate routes                | **Yes**  | None        | `sveltekit`, `nextjs`   |
 | `-od, --output-directory <string>` | Directory where the generated routes file is saved | No       | Current dir | Any valid path          |
 | `-of, --output-file-name <string>` | Name of the file with generated routes             | No       | `routes.js` | Any valid file name     |
-| `-fn, --function-name <name>`   | Function name that will be used to get url path for given file | No       | `getRoute`  | Any valid function name |
+| `-fn, --function-name <name>`   | Function name that will be used to get url path for given file | No       | `_get`  | Any valid function name |
 | `-m, --module-system <ModuleSystem>` | Module system to use (commonjs or es6)            | No       | `es6`       | `es6`, `commonjs`       |
 | `-v, --verbose <boolean>`       | Enable verbose logging                                | No       | `false`     | `true`, `false`         |
 
@@ -51,7 +51,7 @@ Here are the available options you can use with the Typed Route Generator:
 To use this tool via the command line, you can run it directly with npx:
 
 ```bash
-npx @dabrowskif/typed-routes -fr SvelteKit -r src/routes
+npx @dabrowskif/typed-routes -f SvelteKit -r src/routes
 ```
 
 Alternatively, if you have installed it as a dependency in your project, you can add a script to your `package.json`:
@@ -59,12 +59,12 @@ Alternatively, if you have installed it as a dependency in your project, you can
 ```
 scripts": {
     ...
-    "generate-typesafe-routes": "typed-routes -f sveltekit -r src/routes"
+    "generate-routes": "typed-routes -f sveltekit -r src/routes"
     ...
 }
 ```
 
-Then, you can generate routes runnint this script:
+Then, you can generate routes running this script:
 
 ```bash
 npm run generate-routes
@@ -96,8 +96,8 @@ For a more integrated development experience, consider running this script concu
 ```
 scripts": {
     ...
-    "generate-typed-routes": "typed-routes -f sveltekit -r src/routes",
-    "generate-typed-routes:watch": "nodemon --exec npm run generate-typesafe-routes --watch src/routes"
+    "generate-routes": "typed-routes -f sveltekit -r src/routes",
+    "generate-routes:watch": "nodemon --exec npm run generate-routes --watch src/routes"
     ...
 }
 ```
