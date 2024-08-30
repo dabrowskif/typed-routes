@@ -1,7 +1,7 @@
 {
   "name": "@dabrowskif/typed-routes",
   "descripton": "Fully typed routes generator for frontend meta frameworks.",
-  "version": "0.6.1",
+  "version": "0.6.2",
   "license": "MIT",
   "author": "dabrowskif",
   "main": "./dist/index.js",

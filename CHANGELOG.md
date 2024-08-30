@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.6.2](https://github.com/dabrowskif/typed-routes/compare/v0.6.1...v0.6.2) (2024-08-30)
+
+
+### Bug Fixes
+
+* attempt to update build ([b125f9d](https://github.com/dabrowskif/typed-routes/commit/b125f9d7d78e95cc6d8322ec39880a95568a7119))
+
 ## [0.6.1](https://github.com/dabrowskif/typed-routes/compare/v0.6.0...v0.6.1) (2024-08-30)
 
 
