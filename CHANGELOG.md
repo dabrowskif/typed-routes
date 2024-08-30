@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.6.3](https://github.com/dabrowskif/typed-routes/compare/v0.6.2...v0.6.3) (2024-08-30)
+
+
+### Bug Fixes
+
+* restore bin ([6c62cf2](https://github.com/dabrowskif/typed-routes/commit/6c62cf2245daec28029b3cf9a703b2c5f36a10f4))
+
 ## [0.6.2](https://github.com/dabrowskif/typed-routes/compare/v0.6.1...v0.6.2) (2024-08-30)
 
 
