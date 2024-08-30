@@ -32,13 +32,8 @@
     "nextjs"
   ],
   "bin": {
-    "typed-routes": "index.js"
+    "typed-routes": "dist/index.js"
   },
-  "files": [
-    "dist",
-    "README.md",
-    "LICENSE"
-  ],
   "dependencies": {
     "commander": "^11.1.0"
   },
