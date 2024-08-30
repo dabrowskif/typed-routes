@@ -51,7 +51,7 @@ Here are the available options you can use with the Typed Route Generator:
 To use this tool via the command line, you can run it directly with npx:
 
 ```bash
-npx @dabrowskif/typed-routes -f SvelteKit -r src/routes
+npx @dabrowskif/typed-routes -f sveltekit -r src/routes
 ```
 
 Alternatively, if you have installed it as a dependency in your project, you can add a script to your `package.json`:
