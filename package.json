@@ -31,7 +31,7 @@
     "nextjs"
   ],
   "bin": {
-    "typed-routes": "dist/index.js"
+    "typed-routes": "index.js"
   },
   "dependencies": {
     "commander": "^11.1.0"
